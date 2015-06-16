@@ -72,7 +72,8 @@ module Rack
       target_response = HttpStreamingResponse.new(target_request, uri.host, uri.port)
 
       target_response.use_ssl = "https" == uri.scheme
-
+      target_response.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      
       # Let rack set the transfer-encoding header
       response_headers = target_response.headers
       response_headers.delete('transfer-encoding')
